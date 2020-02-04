@@ -13,23 +13,32 @@ setmetatable(Item, {
 function Item:_init(gameWorld, image, x, y, radius, xOffset, yOffset, grabbedCallback, collectedCallback)
 	self.image = image
 
+	self.x = x
+	self.y = y
 	self.radius = radius
 	self.xOffset = xOffset
 	self.yOffset = yOffset
 
-	self.body = love.physics.newBody(gameWorld:getWorld(), x, y, "static")
-	self.shape = love.physics.newCircleShape(radius)
+	self.grabbedCallback = grabbedCallback
+	self.collectedCallback = collectedCallback
+
+	self.gameworld = gameWorld
+end
+
+function Item.register(self)
+	self.body = love.physics.newBody(self.gameworld:getWorld(), self.x, self.y, "static")
+	self.shape = love.physics.newCircleShape(self.radius)
 	self.fixture = love.physics.newFixture(self.body, self.shape, 1)
 	self.fixture:setSensor(true)
 	self.fixture:setUserData({
 		["type"] = "item",
-		["grabbedCallback"] = grabbedCallback,
-		["collectedCallback"] = collectedCallback
+		["grabbedCallback"] = self.grabbedCallback,
+		["collectedCallback"] = self.collectedCallback
 	})
 end
 
 function Item.draw(self)
-	if not self.body:isDestroyed() then
+	if self.body and not self.body:isDestroyed() then
 		local width = self.image:getWidth()
 		local height = self.image:getHeight()
 

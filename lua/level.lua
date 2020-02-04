@@ -46,6 +46,7 @@ function Level:_init(gameWorld)
 	})
 
 	self.currentScene = 1
+	self.scenes[self.currentScene]:registerItems()
 end
 
 function Level.draw(self)

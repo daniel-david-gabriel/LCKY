@@ -41,8 +41,13 @@ function ItemFactory:_init(gameWorld)
 	}
 end
 
+--[[
+	When we create an item we shouldn't add it into the physics world
+
+]]
 function ItemFactory.getItem(self, name, x, y)
 	local mapping = self.mappings[name]
+
 	return Item(
 		self.gameWorld,
 		imageFactory:getItemImage(name),

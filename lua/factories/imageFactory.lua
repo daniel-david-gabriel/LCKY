@@ -36,6 +36,15 @@ function ImageFactory:_init()
 		local itemNameTokens = split(item, "[^%.]+")
 		self.itemImages[itemNameTokens[1]] = love.graphics.newImage(self.itemImageBaseDirectory .. item)
 	end
+
+	self.menuImageBaseDirectory = "media/menu/"
+	self.menuImages = {}
+
+	local menus = love.filesystem.getDirectoryItems(self.menuImageBaseDirectory)
+	for i,menu in pairs(menus) do
+		local itemNameTokens = split(menu, "[^%.]+")
+		self.menuImages[itemNameTokens[1]] = love.graphics.newImage(self.menuImageBaseDirectory .. menu)
+	end
 end
 
 function ImageFactory.getOverlayImages(self)
@@ -48,4 +57,8 @@ end
 
 function ImageFactory.getItemImage(self, name)
 	return self.itemImages[name]
+end
+
+function ImageFactory.getMenuImage(self, name)
+	return self.menuImages[name]
 end

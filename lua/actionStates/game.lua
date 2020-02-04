@@ -25,7 +25,7 @@ function Game:_init()
 	self.tongue = Tongue()
 	self.tongue:new(self.gameWorld, 30, 5)
 
-	self.overlay = Overlay("forwards", 1)
+	self.overlay = Overlay("forwards", 2)
 
 	self.level = Level(self.gameWorld)
 end

@@ -15,29 +15,28 @@ setmetatable(MainMenu, {
 function MainMenu:_init()
 	local mainMenuOptions = {}
 	mainMenuOptions[1] = {
-		["text"] = "New Game",
+		["text"] = function() return "New Game" end,
 		["callback"] = function() toState = missionStart end,
 	}
 	mainMenuOptions[2] = {
-		["text"] = "Load Game",
+		["text"] = function() return "Load Game" end,
 		["callback"] = function() game:load(Save("save.dat")) toState = game end,
 	}
 	mainMenuOptions[3] = {
-		["text"] = "Options",
+		["text"] = function() return "Options" end,
 		["callback"] = function() toState = options end,
 	}
 	mainMenuOptions[4] = {
-		["text"] = "Credits",
+		["text"] = function() return "Credits" end,
 		["callback"] = function() toState = credits end,
 	}
 	mainMenuOptions[5] = {
-		["text"] = "Quit",
+		["text"] = function() return "Quit" end,
 		["callback"] = function() love.event.push("quit") end,
 	}
 
-	CursorMenu._init(self, mainMenuOptions)
+	CursorMenu._init(self, "darkBackground", mainMenuOptions)
 
-	self.background = love.graphics.newImage("assets/darkBackground.png")
 	self.title = love.graphics.newImage("assets/title.png")
         self.cloud = love.graphics.newImage("assets/cloud.png")
 	self.sfx = "menu"
@@ -60,15 +59,8 @@ function MainMenu:_init()
 end
 
 function MainMenu.draw(self)
-	--determine scaling for background image
-	local width = love.graphics.getWidth()
-	local height = love.graphics.getHeight()
-	local imageWidth = self.background:getWidth()
-	local imageHeight = self.background:getHeight()
+	CursorMenu.draw(self)
 
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.draw(self.background, 0, 0, 0, width / imageWidth, height / imageHeight)
-	
 	for k,v in pairs(self.cloudPositions) do
 		love.graphics.setColor(255, 255, 255, self.cloudAlpha)
 		love.graphics.draw(self.cloud, v, k)
@@ -82,10 +74,7 @@ function MainMenu.draw(self)
 	love.graphics.setColor(255, 255, 255, 255)
 	--love.graphics.printf(self.menuText, love.graphics.getWidth()/4, love.graphics.getHeight()/2, love.graphics.getWidth()/2, "center")
 
-	love.graphics.draw(self.title, 0, 0)
-
-
-	CursorMenu.draw(self)
+	love.graphics.draw(self.title, 0, 0)	
 end
 
 function MainMenu.update(self, dt)

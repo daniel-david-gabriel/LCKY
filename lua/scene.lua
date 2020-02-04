@@ -31,3 +31,9 @@ function Scene.draw(self)
 		item:draw()
 	end
 end
+
+function Scene.registerItems(self)
+	for i,item in pairs(self.items) do
+		item:register()
+	end
+end

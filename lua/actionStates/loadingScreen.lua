@@ -1,6 +1,7 @@
 require("lua/actionStates/game")
 require("lua/actionStates/mainMenu")
 require("lua/actionStates/missionStart")
+require("lua/actionStates/options")
 require("lua/factories/imageFactory")
 require("lua/sounds/music")
 require("lua/sounds/soundEffects")
@@ -56,6 +57,8 @@ function LoadingScreen.update(self, dt)
 	elseif not missionStart then
 		missionStart = MissionStart()
 		mainMenu = MainMenu()
+		options = Options()
+		options.videoOptions:refreshDisplay()
 		self.loadingText = "Done!"
 		self.loading = false
 	end

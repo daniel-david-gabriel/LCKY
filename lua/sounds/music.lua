@@ -30,8 +30,7 @@ function Music.playMusic(self, songName)
 			self.currentSong:stop()
 		end
 
-		--song:setVolume(options.soundOptions.masterVolume * options.soundOptions.bgmVolume)
-		song:setVolume(1)
+		song:setVolume(options.soundOptions.masterVolume * options.soundOptions.bgmVolume)
 		song:play()
 		self.currentSong = song
 	else
@@ -48,6 +47,6 @@ function Music.stopAllSounds(self)
 end
 
 function Music.applyVolume(self)
-	--self.currentSong:setVolume(options.soundOptions.masterVolume * options.soundOptions.bgmVolume)
+	self.currentSong:setVolume(options.soundOptions.masterVolume * options.soundOptions.bgmVolume)
 end
 

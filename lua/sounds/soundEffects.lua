@@ -23,8 +23,7 @@ function SoundEffects.playSoundEffect(self, effectName)
 		if soundEffect:isPlaying() then
 			soundEffect:stop()
 		end
-	
-		--soundEffect:setVolume(options.soundOptions.masterVolume * options.soundOptions.sfxVolume)
+		soundEffect:setVolume(options.soundOptions.masterVolume * options.soundOptions.sfxVolume)
 		soundEffect:play()
 	else
 		if debug then

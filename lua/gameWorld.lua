@@ -13,7 +13,7 @@ setmetatable(GameWorld, {
 function GameWorld:_init()
 	self.width, self.height = love.graphics.getDimensions()
 
-	self.meterLength = self.width / 30 -- 64 for a 1920px wide screen
+	self.meterLength = self.width / 64
 	self.xGravity = 0
 	self.yGravity = 0
 

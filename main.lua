@@ -1,9 +1,6 @@
 require("lua/actionStates/loadingScreen")
 require("lua/controls/controls")
 
-debug = true -- get from options or something
-debugText = "Debug"
-
 function love.load()
 	local myFont = love.graphics.newImageFont("assets/fontBold.png", " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,!?\'\"0123456789-+")
 	love.graphics.setFont(myFont)
@@ -17,10 +14,10 @@ end
 function love.draw()
 	activeState:draw()
 
-	if debug then
+	if options and options.debug then
 		love.graphics.setColor(255, 255, 255, 255)
 		love.graphics.print(love.timer.getFPS(), 10, 10)
-		love.graphics.print(debugText, 50, 10)
+		love.graphics.print("Debug", 50, 10)
 	end
 end
 
