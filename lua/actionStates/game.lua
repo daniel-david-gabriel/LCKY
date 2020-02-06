@@ -53,6 +53,7 @@ end
 
 function Game.update(self, dt)
 	music:playMusic("SpeedReed")
+	self.level:update(dt)
 	self.gameWorld:update(dt)
 	self.tongue:processControls(nil)
 	self.tongue:update(dt)

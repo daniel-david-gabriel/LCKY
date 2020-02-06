@@ -260,7 +260,7 @@ function Tongue.beginContact(self, a, b, coll)
 		-- item despawn logic
 		self.grabbedItem.item:getUserData().collectedCallback()
 		self.grabbedItem.item:getBody():destroy()
-		self.grabbedItem.item = nil
+		self.grabbedItem.item = nil -- this does nothing....
 		self.grabbedItem.timer = 0
 		self:destroy()
 

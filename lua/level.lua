@@ -46,9 +46,29 @@ function Level:_init(gameWorld)
 	})
 
 	self.currentScene = 1
-	self.scenes[self.currentScene]:registerItems()
+	Level.registerItems(self)
 end
 
 function Level.draw(self)
-	self.scenes[self.currentScene]:draw()
+	if self.scenes[self.currentScene] then
+		self.scenes[self.currentScene]:draw()
+	elseif options and options.debug then
+		error("Attempting to draw an invalid scene")
+	end
+end
+
+function Level.update(self, dt)
+	if self.scenes[self.currentScene]:allItemsCollected() then
+		if self.currentScene + 1 > table.getn(self.scenes) then
+			-- just go back to the main menu for now...
+			toState = mainMenu
+		else
+			self.currentScene = self.currentScene + 1
+			Level.registerItems(self)
+		end
+	end
+end
+
+function Level.registerItems(self)
+	self.scenes[self.currentScene]:registerItems()
 end

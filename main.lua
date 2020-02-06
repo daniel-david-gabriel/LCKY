@@ -68,8 +68,8 @@ end
 function beginContact(a, b, coll)
 	if activeState.beginContact then
 		activeState:beginContact(a, b, coll)
-	else
-		print("Physics callback triggered from state without physics.")
+	elseif options.debug then
+		error("Physics callback triggered from state without physics.")
 	end
 end
  

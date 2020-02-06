@@ -37,3 +37,12 @@ function Scene.registerItems(self)
 		item:register()
 	end
 end
+
+function Scene.allItemsCollected(self)
+	for i,item in pairs(self.items) do
+		if not item.body:isDestroyed() then
+			return false
+		end
+	end
+	return true
+end

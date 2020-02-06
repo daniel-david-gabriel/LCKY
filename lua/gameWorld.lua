@@ -64,10 +64,12 @@ end
 	A debug function that draws all boundary edges.
 ]]
 function GameWorld.draw(self)
-	love.graphics.setColor(255, 255, 255, 255)
+	if options and options.debug then
+		love.graphics.setColor(255, 255, 255, 255)
 
-	for k,v in pairs(self.boundary) do
-		local x1, y1, x2, y2 = v.shape:getPoints()
-		love.graphics.line(x1, y1, x2, y2)
+		for k,v in pairs(self.boundary) do
+			local x1, y1, x2, y2 = v.shape:getPoints()
+			love.graphics.line(x1, y1, x2, y2)
+		end
 	end
 end
