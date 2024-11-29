@@ -16,7 +16,7 @@ setmetatable(SoundOptions, {
 function SoundOptions:_init()
 	self.soundOptionsFilename = "soundOptions.dat"
 
-	if love.filesystem.exists(self.soundOptionsFilename) then
+	if love.filesystem.getInfo(self.soundOptionsFilename) then
 		local soundOptions = love.filesystem.lines(self.soundOptionsFilename)
 		for line in soundOptions do
 			local lineTokens = split(line, "[^\t]+")

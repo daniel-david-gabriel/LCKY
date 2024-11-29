@@ -41,7 +41,7 @@ function VideoOptions:_init()
 			"1280x800", "1280x960", "1280x1024", "1446x900", "1680x1050", "1920x1080"
 	}
 
-	if love.filesystem.exists(self.videoOptionsFilename) then
+	if love.filesystem.getInfo(self.videoOptionsFilename) then
 		local videoOptions = love.filesystem.lines(self.videoOptionsFilename)
 		for line in videoOptions do
 			local lineTokens = split(line, "[^\t]+")

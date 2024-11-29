@@ -27,11 +27,22 @@ function MissionStart:_init()
 	self.alpha = 0
 
 	self.overlay = Overlay("backwards", 3)
+
+	-- Color controls
+	self.hue = 0
+	self.hueVelocity = -3
 end
 
 function MissionStart.draw(self)
+	
+	self.hue = self.hue + self.hueVelocity
+	if self.hue > 255 then
+		self.hue = 0
+	end
+
 	if self.state == self.states.text then
-		love.graphics.setColor(1, 1, 1, 1)
+		--love.graphics.setColor(1, 1, 1, 1)
+		love.graphics.setColor(HSL(self.hue%255,255,128))
 		love.graphics.printf("MISSION START", 0, love.graphics.getHeight()/2 - 20, love.graphics.getWidth(), "center")
 	elseif self.state == self.states.fadeIn or self.state == self.states.done then
 		game.level:draw()
@@ -40,7 +51,8 @@ function MissionStart.draw(self)
 		love.graphics.setColor(0, 0, 0, 1-(self.alpha/255))
 		love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
 
-		love.graphics.setColor(1, 1, 1, 1)
+		--love.graphics.setColor(1, 1, 1, 1)
+		love.graphics.setColor(HSL(self.hue%255,255,128))
 		love.graphics.printf("MISSION START", 0, love.graphics.getHeight()/2 - 20, love.graphics.getWidth(), "center")
 	end
 end
